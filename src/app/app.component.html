@@ -1,0 +1,61 @@
+<div style="height: 300px;width: 800px; margin: 10px;">
+    <ejs-toolbar id="toolbar">
+        <e-items>
+            <e-item text="Undo" prefixIcon="e-icons e-undo" (click)="onClick($event)"></e-item>
+            <e-item text="Redo" prefixIcon="e-icons e-redo" (click)="onClick($event)"></e-item>
+            <e-item type="Separator"></e-item>
+            <e-item tooltipText="Stroke Color">
+                <ng-template #template>
+                    <input id="stroke-color" ejs-colorpicker 
+                        mode='Palette'
+                        cssClass="e-stroke-color"
+                        [modeSwitcher]= false
+                        [showButtons]= false
+                        [presetColors]="presetColors"
+                        columns="4"
+                        (change)="onColorChange($event, 'stroke-color')"
+                        (created)="onCreated('stroke-color')"/>
+                </ng-template>
+            </e-item>
+            <e-item tooltipText="Background Color">
+                <ng-template #template>
+                    <input id="bg-color" ejs-colorpicker 
+                        [noColor]=true
+                        mode='Palette'
+                        cssClass="e-bg-color"
+                        [modeSwitcher]= false
+                        [showButtons]= false
+                        [presetColors]="presetColors"
+                        columns="4"
+                        (change)="onColorChange($event, 'bg-color')"
+                        (created)="onCreated('bg-color')"/>
+                </ng-template>
+            </e-item>
+            <e-item>
+                <ng-template #template>
+                    <ejs-splitbutton [items]="widthOptions"
+                    iconCss='e-icons e-stroke-width'
+                    (select)="onSelect($event, 'stroke-width')"></ejs-splitbutton>
+                </ng-template>
+            </e-item>
+            <e-item type="Separator"></e-item>
+            <e-item>
+                <ng-template #template>
+                    <ejs-splitbutton id='save' [items]="saveOptions"
+                    iconCss='e-icons e-save'
+                    content="Save"
+                    [disabled]="true"
+                    (select)="onSelect($event, 'save')"></ejs-splitbutton>
+                </ng-template>
+            </e-item>
+            <e-item type="Separator"></e-item>
+            <e-item text="Clear" prefixIcon="e-sign-icons e-clear" (click)="onClick($event)"></e-item>
+            <e-item align="right">
+                <ng-template #template>
+                    <ejs-checkbox label='Disabled' [checked]=false (change)="valueChanged($event)"></ejs-checkbox>
+                </ng-template>
+            </e-item>
+        </e-items>
+    </ejs-toolbar>
+    <canvas ejs-signature #signature style="height: 100%; width: 100%;" (change)="onChange()"></canvas>
+</div>
